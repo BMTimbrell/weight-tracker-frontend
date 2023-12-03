@@ -1,28 +1,28 @@
-import useLocalStorage from '../../hooks/useLocalStorage';
 import { logoutUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export default function Logout() {
-    const [id, setId, removeId] = useLocalStorage('id');
+    const user = localStorage.getItem('user');
+
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
-    useState(() => {
+    useEffect(() => {
+        if (!user) navigate('/');
+    }, [navigate]);
+
+    useEffect(() => {
         setLoading(true);
         logoutUser()
             .then(() => {
-                removeId();
+                localStorage.removeItem('user');
                 setLoading(false);
                 navigate('/login');
             })
             .catch(() => setError(true));
-    }, []);
+    }, [navigate]);
     
-    useState(() => {
-        if (!id) navigate('/');
-    }, [id]);
-
     return <h1>{loading ? 'Logging Out...' : error ? 'Logout Failed' : ''}</h1>;
 }

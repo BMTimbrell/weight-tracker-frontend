@@ -1,24 +1,23 @@
 import { useCallback, useState, useEffect } from 'react';
 
-export default function useLocalStorage(key, defaultValue) {
+export default function useLocalStorage(key) {
     const [value, setValue] = useState(() => {
         const jsonValue = localStorage.getItem(key);
 
-        if (jsonValue !== null) return JSON.parse(jsonValue);
+        if (jsonValue) return JSON.parse(jsonValue);
 
-        if (typeof defaultValue === 'function') return defaultValue();
-        else return defaultValue;
-
+        return undefined;
     });
 
     useEffect(() => {
-        if (value === undefined) return localStorage.removeItem(key);
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value, localStorage]);
+        if (value !== undefined)
+            localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value, setValue]);
 
-    const remove = useCallback(() => {
-        setValue(undefined);
-    }, []);
+    const remove = () => {
+        //setValue(undefined);
+        //localStorage.removeItem(key);
+    };
 
     return [value, setValue, remove];
 }

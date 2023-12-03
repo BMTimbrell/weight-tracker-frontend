@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { registerUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 
@@ -40,17 +40,27 @@ function RegistrationForm() {
             return;
         }
         setLoading(true);
-        await registerUser(formData.name, formData.email, formData.password);
+        const user = await registerUser(formData.name, formData.email, formData.password);
+
+        if (user) {
+            localStorage.setItem('user', JSON.stringify({
+                id: user.id,
+                name: user.name
+            }));
+            navigate('/');
+        } else {
+            setError('Registration Failed');
+        }
+
         setLoading(false);
-        navigate('/');
     };
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="email" name="email" onChange={handleChange} placeholder="Enter Email" />
-            <input type="name" name="name" onChange={handleChange} placeholder="Enter Name" />
-            <input type="password" name="password" onChange={handleChange} placeholder="Enter Password" />
-            <input type="password" name="reEnteredPassword" onChange={handleChange} placeholder="Re-enter Password" />
+            <input type="email" name="email" onChange={handleChange} placeholder="Enter Email" required />
+            <input type="name" name="name" onChange={handleChange} placeholder="Enter Name" required />
+            <input type="password" name="password" onChange={handleChange} placeholder="Enter Password" required />
+            <input type="password" name="reEnteredPassword" onChange={handleChange} placeholder="Re-enter Password" required />
             <button type="submit" disabled={loading}>Register</button>
             {error}
         </form>
