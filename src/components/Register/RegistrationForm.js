@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { registerUser } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
 
 function RegistrationForm() {
     const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ function RegistrationForm() {
     });
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = e => {
         switch (e.target.name) {
@@ -40,6 +42,7 @@ function RegistrationForm() {
         setLoading(true);
         await registerUser(formData.name, formData.email, formData.password);
         setLoading(false);
+        navigate('/');
     };
 
     return (

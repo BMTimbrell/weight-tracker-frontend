@@ -50,3 +50,18 @@ export const loginUser = async (email, password) => {
         console.log(error);
     }
 };
+
+export const logoutUser = async () => {
+    try {
+        const response = await fetch(`${baseUrl}/logout`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        return response;
+    } catch (error) {
+        console.log(error);
+    }
+};
