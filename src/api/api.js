@@ -60,8 +60,44 @@ export const logoutUser = async () => {
             credentials: "include"
         });
         
-        return response;
+        return response.json();
     } catch (error) {
         console.log(error);
     }
 };
+
+export const fetchUser = async (id, signal) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/${id}`, {
+            signal,
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const fetchWeightData = async (id) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/${id}/weight`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};
+

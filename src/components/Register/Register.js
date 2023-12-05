@@ -1,9 +1,10 @@
 import RegistrationForm from './RegistrationForm';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/UserContext';
 
 function Register() {
-    const user = localStorage.getItem('user');
+    const { user } = useUser();
     const navigate = useNavigate();
 
     useEffect(() => {

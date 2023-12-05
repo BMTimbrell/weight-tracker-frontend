@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { registerUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/UserContext';
 
 function RegistrationForm() {
     const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ function RegistrationForm() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const { setUser } = useUser();
 
     const handleChange = e => {
         switch (e.target.name) {
@@ -43,10 +45,10 @@ function RegistrationForm() {
         const user = await registerUser(formData.name, formData.email, formData.password);
 
         if (user) {
-            localStorage.setItem('user', JSON.stringify({
+            setUser({
                 id: user.id,
                 name: user.name
-            }));
+            });
             navigate('/');
         } else {
             setError('Registration Failed');

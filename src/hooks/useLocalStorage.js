@@ -1,23 +1,37 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-export default function useLocalStorage(key) {
-    const [value, setValue] = useState(() => {
-        const jsonValue = localStorage.getItem(key);
-
-        if (jsonValue) return JSON.parse(jsonValue);
-
-        return undefined;
+export default function useLocalStorage(key, initialValue = null) {
+    const [storedValue, setStoredValue] = useState(() => {
+        try {
+            const item = localStorage.getItem(key);
+            return item ? JSON.parse(item) : initialValue;
+        } catch (error) {
+            console.log(error);
+            return initialValue;
+        }
     });
 
-    useEffect(() => {
-        if (value !== undefined)
-            localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value, setValue]);
+    /*useEffect(() => {
+        if (value === null) {
+            console.log('nooo');
+            return localStorage.removeItem(key);
+        }
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value, setValue]);*/
 
-    const remove = () => {
-        //setValue(undefined);
-        //localStorage.removeItem(key);
+    const setValue = value => {
+        try {
+            setStoredValue(value);
+            localStorage.setItem(key, JSON.stringify(value));
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    return [value, setValue, remove];
+    const removeValue = () => {
+        setValue(null);
+        localStorage.removeItem(key);
+    };
+
+    return { storedValue, setValue, removeValue };
 }

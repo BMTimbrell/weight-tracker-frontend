@@ -1,4 +1,4 @@
-import useAsync from './useAsync';
+import { useState, useEffect } from 'react';
 
 const DEFAULT_OPTIONS = {
     credentials: 'include',
@@ -7,11 +7,27 @@ const DEFAULT_OPTIONS = {
     },
 };
 
-export default function useFetch(endpoint, options = {}, dependencies = [], url='http://localhost:3001') {
-    return useAsync(() => {
-        return fetch(url + endpoint, {...DEFAULT_OPTIONS, ...options}).then(res => {
-            if (res.ok) return res.json();
-            return res.json().then(json => Promise.reject(json));
-        });
-    }, dependencies);
+export default function useFetch(endpoint, options = {}, url='http://localhost:3001') {
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        fetch(url + endpoint, { 
+            ...DEFAULT_OPTIONS,
+            ...options
+        })
+            .then(res => {
+                if (res.ok) res.json().then(json => setData(json));
+                else setError(true);
+            })
+            .catch(e => {
+                console.log(e);
+                setError(true);
+            })
+            .finally(() => setLoading(false));
+    }, [url, endpoint]);
+
+    return { loading, data, error };
 }
