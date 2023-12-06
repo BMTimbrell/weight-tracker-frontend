@@ -6,6 +6,7 @@ import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import Logout from './components/Login/Logout';
 import Profile from './components/Profile/Profile';
+import WeightTracker from './components/WeightTracker/WeightTracker';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="logout" element={<Logout />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="profile/weight" element={<WeightTracker />} /> 
         </Route>
       </Routes>
     </BrowserRouter>

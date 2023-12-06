@@ -31,14 +31,14 @@ export const loginUser = async (email, password) => {
         const response = await fetch(`${baseUrl}/login`, {
             method: 'POST',
             credentials: "include",
-                body: JSON.stringify({
-                    email,
-                    password
-                }),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                }
+            body: JSON.stringify({
+                email,
+                password
+            }),
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
         });
 
         
@@ -90,6 +90,30 @@ export const fetchWeightData = async (id) => {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include"
+        });
+        
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+export const postWeightData = async (id, weight, date) => {
+    console.log(date);
+    console.log(weight);
+    try {
+        const response = await fetch(`${baseUrl}/users/${id}/weight`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                weight,
+                date
+            }),
             credentials: "include"
         });
         
