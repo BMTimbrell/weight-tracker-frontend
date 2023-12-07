@@ -102,8 +102,6 @@ export const fetchWeightData = async (id) => {
 };
 
 export const postWeightData = async (id, weight, date) => {
-    console.log(date);
-    console.log(weight);
     try {
         const response = await fetch(`${baseUrl}/users/${id}/weight`, {
             method: "POST",
