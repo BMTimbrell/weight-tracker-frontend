@@ -20,8 +20,8 @@ export default function WeightTracker() {
     const weightRef = useRef(0);
     const [formattedData, setFormattedData] = useState(null);
     const [years, setYears] = useState([]);
-    const { storedValue: inKilos, setValue: setInKilos } = useLocalStorage('inKilos');
-    const [filter, setFilter] = useState({
+    const { value: inKilos, setValue: setInKilos } = useLocalStorage('inKilos', false);
+    const { value: filter, setValue: setFilter } = useLocalStorage('filter', {
         month: new Date().getMonth() + 1,
         year: new Date().getFullYear()
     });

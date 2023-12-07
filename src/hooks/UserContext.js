@@ -8,7 +8,7 @@ export function useUser() {
 }
 
 export function UserProvider({ children }) {
-    const { storedValue: user, setValue: setUser, removeValue: removeUser } = useLocalStorage('user');
+    const { value: user, setValue: setUser, removeValue: removeUser } = useLocalStorage('user');
 
     return (
         <UserContext.Provider value={{user, setUser, removeUser}}>
