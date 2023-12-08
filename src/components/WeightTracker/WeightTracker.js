@@ -26,9 +26,13 @@ export default function WeightTracker() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        if (!user) navigate('/login');
+    }, [user]);
+
+    useEffect(() => {
         if (weightData?.authorisationFailed) {
             navigate('/logout');
-            return
+            return;
         }
         
         if (weightData) {

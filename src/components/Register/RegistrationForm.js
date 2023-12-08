@@ -43,7 +43,10 @@ function RegistrationForm() {
         }
         setLoading(true);
         const user = await registerUser(formData.name, formData.email, formData.password);
-
+        if (user?.emailExists) {
+            setError('User already registered with this email');
+            return;
+        }
         if (user) {
             setUser({
                 id: user.id,

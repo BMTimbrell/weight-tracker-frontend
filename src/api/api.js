@@ -16,7 +16,7 @@ export const registerUser = async (name, email, password) => {
                 }
         });
 
-        console.log(response);
+        if (response.status === 409) return {emailExists: true};
         if (response.ok) {
             return response.json();
         }
@@ -66,7 +66,7 @@ export const logoutUser = async () => {
     }
 };
 
-export const fetchUser = async (id, signal) => {
+/*export const fetchUser = async (id, signal) => {
     try {
         const response = await fetch(`${baseUrl}/users/${id}`, {
             signal,
@@ -76,6 +76,30 @@ export const fetchUser = async (id, signal) => {
             credentials: "include"
         });
         
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};*/
+
+export const updateUser = async (id, name = "", email = "", password = "") => {
+    try {
+        const response = await fetch(`${baseUrl}/users/${id}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                name,
+                email,
+                password
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        if (response.status === 409) return {emailExists: true};
         if (response.ok) return response.json();
 
         return null;
