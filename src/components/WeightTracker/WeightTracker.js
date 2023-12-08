@@ -1,12 +1,10 @@
 import useFetch from '../../hooks/useFetch';
 import { useUser } from '../../hooks/UserContext';
 import WeightForm from './WeightForm';
-import WeightData from './WeightData';
+import WeightDataList from './WeightDataList';
 import { useRef, useState, useEffect } from 'react';
-import { postWeightData } from '../../api/api';
 import formatDate from '../../utils/formatDate';
 import convertToUnit from '../../utils/convertToUnit';
-import isPositiveNumber from '../../utils/isPositiveNumber';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
@@ -15,7 +13,6 @@ export default function WeightTracker() {
     const [editing, setEditing] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const { loading, data: weightData, error } = useFetch(`/users/${user?.id}/weight`, {}, [editing, submitting]);
-    const [formError, setFormError] = useState('');
     const dateRef = useRef();
     const weightRef = useRef(0);
     const [formattedData, setFormattedData] = useState(null);
@@ -47,6 +44,7 @@ export default function WeightTracker() {
                     const date = formatDate(data.date);
                     const dateFormatted = `${date.day}/${date.month}/${date.year}`;
                     return {
+                        id: data.id,
                         dateFormatted,
                         date,
                         weight: !inKilos ? Number(data.weight) : convertToUnit(data.weight, 'kg')
@@ -55,21 +53,6 @@ export default function WeightTracker() {
             );
        }
     }, [weightData, inKilos, filter]);
-
-    const handleSubmit = async e => {
-        e.preventDefault(e);
-        if (!isPositiveNumber(weightRef.current.value)) {
-            setFormError('You must enter a positive number for weight');
-            return;
-        }
-        setSubmitting(true);
-        const weight = !inKilos ? Number(weightRef.current.value) : convertToUnit(weightRef.current.value, 'lbs');
-        const result = await postWeightData(user.id, weight, dateRef.current.value);
-        setSubmitting(false);
-        weightRef.current.value = null;
-        dateRef.current.value = null;
-        if (!result) setFormError('Submission failed');
-    };
 
     const generateMonthOptions = () => {
         const months = [];
@@ -127,18 +110,28 @@ export default function WeightTracker() {
               </LineChart>
             }
 
+            <button onClick={() => setEditing(!editing)}>{!editing ? 'Edit' : 'Show Graph'}</button>
+
             {weightData?.weightList?.length > 0 && editing &&
-                <WeightData data={weightData.weightList} />
+                <WeightDataList 
+                    data={formattedData} 
+                    dateRef={dateRef} 
+                    weightRef={weightRef}  
+                    submitting={submitting}
+                    setSubmitting={setSubmitting}
+                    inKilos={inKilos} 
+                    buttonText="Save Changes"
+                />
             }
+
             <h2>Submit Weight</h2>
             <WeightForm 
                 dateRef={dateRef} 
                 weightRef={weightRef} 
-                handleSubmit={handleSubmit} 
                 submitting={submitting}
-                error={formError}
-                setError={setFormError} 
+                setSubmitting={setSubmitting}
                 inKilos={inKilos}
+                buttonText="Submit Weight"
             />
         </>
     );

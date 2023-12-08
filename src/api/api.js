@@ -123,3 +123,25 @@ export const postWeightData = async (id, weight, date) => {
     }
 };
 
+export const updateWeightData = async (userId, dataId, weight, date) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/${userId}/weight/${dataId}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                weight,
+                date
+            }),
+            credentials: "include"
+        });
+        
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
