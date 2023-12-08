@@ -145,3 +145,20 @@ export const updateWeightData = async (userId, dataId, weight, date) => {
     }
 };
 
+export const deleteWeightData = async (userId, dataId) => {
+    try {
+        const response = await fetch(`${baseUrl}/users/${userId}/weight/${dataId}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            credentials: "include"
+        });
+        
+        if (response.ok) return response.json();
+
+        return null;
+    } catch (error) {
+        console.log(error);
+    }
+};

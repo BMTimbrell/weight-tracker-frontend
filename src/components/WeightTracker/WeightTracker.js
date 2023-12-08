@@ -110,7 +110,7 @@ export default function WeightTracker() {
               </LineChart>
             }
 
-            <button onClick={() => setEditing(!editing)}>{!editing ? 'Edit' : 'Show Graph'}</button>
+            <button onClick={() => setEditing(!editing)}>{!editing ? 'Edit' : 'Go back'}</button>
 
             {weightData?.weightList?.length > 0 && editing &&
                 <WeightDataList 
@@ -124,15 +124,20 @@ export default function WeightTracker() {
                 />
             }
 
-            <h2>Submit Weight</h2>
-            <WeightForm 
-                dateRef={dateRef} 
-                weightRef={weightRef} 
-                submitting={submitting}
-                setSubmitting={setSubmitting}
-                inKilos={inKilos}
-                buttonText="Submit Weight"
-            />
+            {!editing && (
+                <>
+                    <h2>Submit Weight</h2>
+                    <WeightForm 
+                        dateRef={dateRef} 
+                        weightRef={weightRef} 
+                        submitting={submitting}
+                        setSubmitting={setSubmitting}
+                        inKilos={inKilos}
+                        buttonText="Submit Weight"
+                    />
+                </>
+            )}
+            
         </>
     );
 }
