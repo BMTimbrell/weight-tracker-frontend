@@ -5,7 +5,7 @@ import WeightDataList from './WeightDataList';
 import { useRef, useState, useEffect } from 'react';
 import formatDate from '../../utils/formatDate';
 import convertToUnit from '../../utils/convertToUnit';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 export default function WeightTracker() {
@@ -91,15 +91,15 @@ export default function WeightTracker() {
 
             {weightData?.weightList?.length > 0 && !editing && formattedData &&
                 <LineChart
-                width={500}
-                height={300}
-                data={formattedData}
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}
+                    width={500}
+                    height={300}
+                    data={formattedData}
+                    margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                    }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="dateFormatted" />

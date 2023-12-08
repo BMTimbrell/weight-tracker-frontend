@@ -6,6 +6,7 @@ import { useUser } from '../../hooks/UserContext';
 export default function WeightData({ children, dataId, updating, setUpdating, inKilos, dateRef, weightRef, submitting, setSubmitting }) {
     const [editing, setEditing] = useState(updating.id === dataId);
     const { user } = useUser();
+    const [error, setError] = useState('');
 
     useEffect(() => {
         setEditing(updating.id === dataId);
@@ -16,6 +17,7 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
             {!editing ? (
                 <>
                     {children}
+                    {error}
                     <button 
                         onClick={() => setUpdating({id: dataId})} 
                         disabled={submitting}
@@ -25,7 +27,8 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
                     <button 
                         onClick={async () => {
                             setSubmitting(true);
-                            await deleteWeightData(user.id, dataId);
+                            const result = await deleteWeightData(user.id, dataId);
+                            if (!result) setError('Failed to remove weight');
                             setSubmitting(false);
                         }}
                         disabled={submitting}
