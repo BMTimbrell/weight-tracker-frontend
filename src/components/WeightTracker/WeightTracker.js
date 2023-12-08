@@ -7,6 +7,7 @@ import formatDate from '../../utils/formatDate';
 import convertToUnit from '../../utils/convertToUnit';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import useLocalStorage from '../../hooks/useLocalStorage';
+import { useNavigate } from 'react-router-dom';
 
 export default function WeightTracker() {
     const { user } = useUser();
@@ -22,9 +23,15 @@ export default function WeightTracker() {
         month: new Date().getMonth() + 1,
         year: new Date().getFullYear()
     });
+    const navigate = useNavigate();
 
     useEffect(() => {
-       if (weightData) {
+        if (weightData?.authorisationFailed) {
+            navigate('/logout');
+            return
+        }
+        
+        if (weightData) {
             //Get list of years to use in filtering
             setYears(weightData.weightList
                 .map(data => formatDate(data.date).year)
@@ -52,7 +59,7 @@ export default function WeightTracker() {
                 })
             );
        }
-    }, [weightData, inKilos, filter]);
+    }, [weightData, inKilos, filter, navigate]);
 
     const generateMonthOptions = () => {
         const months = [];
@@ -85,6 +92,7 @@ export default function WeightTracker() {
                 {generateMonthOptions()}
             </select>
             {loading && <h2>Loading...</h2>}
+            {error && <h2>Failed to load data</h2>}
             {weightData?.weightList?.length < 1 &&
                 <p>You haven't submitted any data yet.</p>
             }

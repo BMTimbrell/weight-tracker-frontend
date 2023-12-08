@@ -14,8 +14,8 @@ export default function Profile() {
     }, [user]);
 
     useEffect(() => {
-        if (error) navigate('/logout');
-    }, [error]);
+        if (userData?.authorisationFailed) navigate('/logout');
+    }, [userData]);
 
     if (!user) return (
         <>
@@ -29,6 +29,7 @@ export default function Profile() {
             <h1>{userData?.name || user['name']}'s Profile</h1>
             <h2>User Details</h2>
             {loading && <p>Loading...</p>}
+            {error && <p>Failed to load data</p>}
             {userData && !loading && !error && (
                 <>
                     <p>Name: {userData.name}</p>

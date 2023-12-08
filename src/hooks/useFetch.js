@@ -20,6 +20,7 @@ export default function useFetch(endpoint, options = {}, dependencies = [], url=
         })
             .then(res => {
                 if (res.ok) res.json().then(json => setData(json));
+                else if (res.status === 401) setData({authorisationFailed: true});
                 else setError(true);
             })
             .catch(e => {

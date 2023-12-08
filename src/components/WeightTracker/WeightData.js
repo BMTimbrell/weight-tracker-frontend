@@ -10,7 +10,7 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
 
     useEffect(() => {
         setEditing(updating.id === dataId);
-    }, [updating]);
+    }, [updating, dataId]);
 
     return (
         <>

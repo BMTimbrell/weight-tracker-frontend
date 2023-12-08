@@ -94,7 +94,7 @@ export const fetchWeightData = async (id) => {
         });
         
         if (response.ok) return response.json();
-
+        if (response.status === 401) return {authorisationFailed: true};
         return null;
     } catch (error) {
         console.log(error);
@@ -116,7 +116,7 @@ export const postWeightData = async (id, weight, date) => {
         });
         
         if (response.ok) return response.json();
-
+        if (response.status === 401) return {authorisationFailed: true};
         return null;
     } catch (error) {
         console.log(error);
@@ -138,7 +138,7 @@ export const updateWeightData = async (userId, dataId, weight, date) => {
         });
         
         if (response.ok) return response.json();
-
+        if (response.status === 401) return {authorisationFailed: true};
         return null;
     } catch (error) {
         console.log(error);
@@ -156,7 +156,7 @@ export const deleteWeightData = async (userId, dataId) => {
         });
         
         if (response.ok) return response.json();
-
+        if (response.status === 401) return {authorisationFailed: true};
         return null;
     } catch (error) {
         console.log(error);
