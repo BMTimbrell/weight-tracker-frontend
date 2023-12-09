@@ -3,7 +3,7 @@ import useLocalStorage from './useLocalStorage';
 
 const UserContext = React.createContext();
 
-export function useUser() {
+export function useUserContext() {
     return useContext(UserContext);
 }
 

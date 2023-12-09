@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { loginUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
+import { useThemeContext } from '../../hooks/ThemeContext';
 
 function LoginForm() {
     const [formData, setFormData] = useState({
@@ -11,7 +12,8 @@ function LoginForm() {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const { setUser } = useUser();
+    const { setUser } = useUserContext();
+    const [theme] = useThemeContext();
 
     const handleChange = e => {
         if (e.target.name === 'email')
@@ -38,7 +40,7 @@ function LoginForm() {
         <form onSubmit={handleSubmit}>
             <input type="email" name="email" onChange={handleChange} placeholder="Enter Email" required />
             <input type="password" name="password" onChange={handleChange} placeholder="Enter Password" required />
-            <button type="submit" disabled={loading}>{!loading ? 'Login' : 'Logging in...'}</button>
+            <button type="submit" className={`${theme} btn`} disabled={loading}>{!loading ? 'Login' : 'Logging in...'}</button>
             {error}
         </form>
     );

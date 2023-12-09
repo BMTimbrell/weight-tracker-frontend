@@ -1,11 +1,11 @@
 import isPositiveNumber from '../../utils/isPositiveNumber';
 import { postWeightData, updateWeightData } from '../../api/api';
 import convertToUnit from '../../utils/convertToUnit';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
 import { useState } from 'react';
 
 export default function WeightForm({ weightRef, dateRef, submitting, setSubmitting, inKilos, buttonText = "Submit", dataId = 0, setEditing = null }) {
-    const { user } = useUser();
+    const { user } = useUserContext();
     const [error, setError] = useState('');
 
     const handleSubmit = async (e, dataId) => {

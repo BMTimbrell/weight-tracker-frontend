@@ -1,10 +1,10 @@
 import LoginForm from './LoginForm';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
 
 function Login() {
-    const { user } = useUser();
+    const { user } = useUserContext();
     const navigate = useNavigate();
 
     useEffect(() => {

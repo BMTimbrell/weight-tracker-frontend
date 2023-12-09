@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import WeightForm from './WeightForm';
 import { deleteWeightData } from '../../api/api';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
 
 export default function WeightData({ children, dataId, updating, setUpdating, inKilos, dateRef, weightRef, submitting, setSubmitting }) {
     const [editing, setEditing] = useState(updating.id === dataId);
-    const { user } = useUser();
+    const { user } = useUserContext();
     const [error, setError] = useState('');
 
     useEffect(() => {

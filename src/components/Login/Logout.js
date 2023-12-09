@@ -1,11 +1,10 @@
 import { logoutUser } from '../../api/api';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
 
 export default function Logout() {
-    //const user = localStorage.getItem('user');
-    const { user, removeUser } = useUser();
+    const { user, removeUser } = useUserContext();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const navigate = useNavigate();
@@ -18,7 +17,6 @@ export default function Logout() {
         setLoading(true);
         logoutUser()
             .then(() => {
-                //localStorage.removeItem('user');
                 removeUser();
                 navigate('/login');
             })

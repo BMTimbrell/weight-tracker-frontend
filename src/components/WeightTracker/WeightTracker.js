@@ -1,5 +1,5 @@
 import useFetch from '../../hooks/useFetch';
-import { useUser } from '../../hooks/UserContext';
+import { useUserContext } from '../../hooks/UserContext';
 import WeightForm from './WeightForm';
 import WeightDataList from './WeightDataList';
 import { useRef, useState, useEffect } from 'react';
@@ -10,7 +10,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 
 export default function WeightTracker() {
-    const { user } = useUser();
+    const { user } = useUserContext();
     const [editing, setEditing] = useState(false);
     const [submitting, setSubmitting] = useState(false);
     const { loading, data: weightData, error } = useFetch(`/users/${user?.id}/weight`, {}, [editing, submitting]);

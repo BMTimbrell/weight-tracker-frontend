@@ -1,5 +1,178 @@
+:root {
+  --blue: background-color: hsl(200, 50%, 50%);
+  --green: background-color: hsl(155, 50%, 45%);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+body.dark {
+  background-color: black;
+  color: white;
+}
+
+body.light {
+  background-color: #e8f0f7;
+  color: black;
+}
+
+body.blue {
+  background-color: rgb(230, 251, 255);
+  color: black;
+}
+
+body.green {
+  background-color: rgb(232, 255, 227);
+  color: black;
+}
+
+.header-content {
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 75rem;
+  margin: 0 auto;
+  padding: 0 1.875rem;
+}
+
+.light {
+  background-color: black;
+  color: white;
+}
+
+.dark {
+  background-color: white;
+  color: black;
+}
+
+.blue {
+  background-color: hsl(200, 50%, 50%);
+  color: white;
+}
+
+.green {
+  background-color: hsl(155, 50%, 45%);
+  color: white;
+}
+
+nav ul {
+  display: flex;
+  column-gap: 2.5rem;
+}
+
+.nav-link {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: all 0.4s ease-in-out;
+  position: relative;
+}
+
+.dark .nav-link {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.nav-link:hover {
+  color: white;
+}
+
+.dark .nav-link:hover {
+  color: black;
+}
+
+.nav-link-active {
+  color: white;
+}
+
+.dark .nav-link-active {
+  color: black;
+}
+
+.nav-link::after {
+  content: '';
+  height: 2px;
+  width: 100%;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  bottom: -0.25rem;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dark .nav-link::after {
+  background-color: black;
+}
+
+.nav-link:hover::after {
+  opacity: 1;
+}
+
+.logo {
+  font-size: 2rem;
+}
+
+.btn {
+  border-radius: 50000px;
+  cursor: pointer;
+  padding: 0.3125em 0.625em;
+  transition: all 0.4s;
+}
+
+.btn.blue:hover {
+  background-color: hsl(200, 50%, 60%);
+}
+
+.btn.green:hover {
+  background-color: hsl(155, 50%, 55%);
+}
+
+.btn.light:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.btn.dark:hover {
+  background-color: hsl(0, 0%, 80%);
+}
+
+.btn:disabled {
+  cursor: default;
+}
+
+.btn.light:disabled {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn.dark:disabled {
+  background-color: hsl(0, 0%, 100%, 0.4);
+}
+
+.btn.blue:disabled {
+  background-color: hsl(200, 50%, 50%, 0.4);
+}
+
+.btn.green:disabled {
+  background-color: hsl(155, 50%, 45%, 0.4);
 }
