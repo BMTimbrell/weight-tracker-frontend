@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import WeightForm from './WeightForm';
 import { deleteWeightData } from '../../api/api';
 import { useUserContext } from '../../hooks/UserContext';
+import { useThemeContext } from '../../hooks/ThemeContext';
 
 export default function WeightData({ children, dataId, updating, setUpdating, inKilos, dateRef, weightRef, submitting, setSubmitting }) {
     const [editing, setEditing] = useState(updating.id === dataId);
     const { user } = useUserContext();
     const [error, setError] = useState('');
+    const [theme] = useThemeContext();
 
     useEffect(() => {
         setEditing(updating.id === dataId);
@@ -19,12 +21,14 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
                     {children}
                     {error}
                     <button 
+                        className={`${theme} btn`}
                         onClick={() => setUpdating({id: dataId})} 
                         disabled={submitting}
                     >
                         Edit
                     </button>
                     <button 
+                        className={`${theme} btn delete`}
                         onClick={async () => {
                             setSubmitting(true);
                             const result = await deleteWeightData(user.id, dataId);
@@ -48,7 +52,11 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
                         dataId={dataId}
                         setEditing={setEditing}
                     />
-                    <button onClick={() => setEditing(false)} disabled={submitting}>
+                    <button 
+                        className={`${theme} btn`} 
+                        onClick={() => setEditing(false)} 
+                        disabled={submitting}
+                    >
                         Cancel
                     </button>
                 </>

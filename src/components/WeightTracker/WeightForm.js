@@ -2,11 +2,13 @@ import isPositiveNumber from '../../utils/isPositiveNumber';
 import { postWeightData, updateWeightData } from '../../api/api';
 import convertToUnit from '../../utils/convertToUnit';
 import { useUserContext } from '../../hooks/UserContext';
+import { useThemeContext } from '../../hooks/ThemeContext';
 import { useState } from 'react';
 
 export default function WeightForm({ weightRef, dateRef, submitting, setSubmitting, inKilos, buttonText = "Submit", dataId = 0, setEditing = null }) {
     const { user } = useUserContext();
     const [error, setError] = useState('');
+    const [theme] = useThemeContext();
 
     const handleSubmit = async (e, dataId) => {
         e.preventDefault(e);
@@ -45,7 +47,7 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
                 max="2100-12-31"
                 required 
             />
-            <button type="submit" disabled={submitting}>{buttonText}</button>
+            <button className={`${theme} btn`} type="submit" disabled={submitting}>{buttonText}</button>
             {error}
         </form>
     );

@@ -13,7 +13,7 @@ function Login() {
 
     return (
         <>
-            <h1>Login</h1>
+            <h1 className="main-heading">Login</h1>
             <LoginForm />
         </>
     );

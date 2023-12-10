@@ -119,7 +119,7 @@ export default function Profile() {
                 <option value="green">Green</option>
             </select>
             <h2>Your Weight</h2>
-            <p>Track your weight <Link to="weight">here</Link></p>
+            <p>Track your weight <Link className="link" to="/">here</Link></p>
         </>
     );
 }

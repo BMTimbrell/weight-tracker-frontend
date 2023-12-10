@@ -13,21 +13,23 @@ export default function useFetch(endpoint, options = {}, dependencies = [], url=
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        setLoading(true);
-        fetch(url + endpoint, { 
-            ...DEFAULT_OPTIONS,
-            ...options
-        })
-            .then(res => {
-                if (res.ok) res.json().then(json => setData(json));
-                else if (res.status === 401) setData({authorisationFailed: true});
-                else setError(true);
+        if (endpoint) {
+            setLoading(true);
+            fetch(url + endpoint, { 
+                ...DEFAULT_OPTIONS,
+                ...options
             })
-            .catch(e => {
-                console.log(e);
-                setError(true);
-            })
-            .finally(() => setLoading(false));
+                .then(res => {
+                    if (res.ok) res.json().then(json => setData(json));
+                    else if (res.status === 401) setData({authorisationFailed: true});
+                    else setError(true);
+                })
+                .catch(e => {
+                    console.log(e);
+                    setError(true);
+                })
+                .finally(() => setLoading(false));
+        }
     }, [url, endpoint, ...dependencies]);
 
     return { loading, data, error };

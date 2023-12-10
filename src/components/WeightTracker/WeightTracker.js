@@ -8,12 +8,19 @@ import convertToUnit from '../../utils/convertToUnit';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
+import { useThemeContext} from '../../hooks/ThemeContext';
+import { Link } from 'react-router-dom';
 
 export default function WeightTracker() {
     const { user } = useUserContext();
+    const [theme] = useThemeContext();
     const [editing, setEditing] = useState(false);
     const [submitting, setSubmitting] = useState(false);
-    const { loading, data: weightData, error } = useFetch(`/users/${user?.id}/weight`, {}, [editing, submitting]);
+    const { loading, data: weightData, error } = useFetch(
+        user && `/users/${user?.id}/weight`,
+        {},
+        [editing, submitting]
+    );
     const dateRef = useRef();
     const weightRef = useRef(0);
     const [formattedData, setFormattedData] = useState(null);
@@ -24,10 +31,6 @@ export default function WeightTracker() {
         year: new Date().getFullYear()
     });
     const navigate = useNavigate();
-
-    useEffect(() => {
-        if (!user) navigate('/login');
-    }, [user]);
 
     useEffect(() => {
         if (weightData?.authorisationFailed) {
@@ -44,8 +47,8 @@ export default function WeightTracker() {
             //Format data for easy use for graph and filtering
             setFormattedData(weightData.weightList
                 .filter(data => {
-                    if (!filter.year) return true;
                     const date = formatDate(data.date);
+                    if (!filter.year) return !filter.month || date.month === filter.month;
                     if (date.year === filter.year) {
                         return !filter.month || date.month === filter.month;
                     }
@@ -75,23 +78,46 @@ export default function WeightTracker() {
         );
     };
 
+    if (!user) return (
+        <>
+            <h1>Track Your Weight</h1>
+            <p>You must <Link className="link" to="/login">log in</Link> to track your weight.</p>
+            <p>Don't have an account? <Link className="link" to="/register">Click here</Link> to register.</p>
+        </>
+    );
+
     return (
         <>
-            <h1>Track Weight</h1>
+            <h1>Track Your Weight</h1>
             <label htmlFor="units">Select Measurement: </label>
-            <select id="units" defaultValue={inKilos} onChange={e => setInKilos(JSON.parse(e.target.value))}>
+            <select
+                className={theme} 
+                id="units" 
+                defaultValue={inKilos} 
+                onChange={e => setInKilos(JSON.parse(e.target.value))}
+            >
                 <option key="1" value={false}>lbs</option>
                 <option key="2" value={true}>kg</option>
             </select>
             <label htmlFor="year">Filter by year: </label>
-            <select id="year" value={filter.year} onChange={e => setFilter(prev => ({...prev, year: Number(e.target.value)}))}>
+            <select
+                className={theme} 
+                id="year" 
+                value={filter.year} 
+                onChange={e => setFilter(prev => ({...prev, year: Number(e.target.value)}))}
+            >
                 <option key="none" value={0}>Any</option>
                 {years.map(year => 
                     <option key={year} value={year}>{year}</option>
                 )}
             </select>
             <label htmlFor="month">Filter by month: </label>
-            <select id="month" value={filter.month} onChange={e => setFilter(prev => ({...prev, month: Number(e.target.value)}))}>
+            <select
+                className={theme} 
+                id="month" 
+                value={filter.month} 
+                onChange={e => setFilter(prev => ({...prev, month: Number(e.target.value)}))}
+            >
                 <option key="none" value={0}>Any</option>
                 {generateMonthOptions()}
             </select>
@@ -122,7 +148,9 @@ export default function WeightTracker() {
               </LineChart>
             }
 
-            <button onClick={() => setEditing(!editing)}>{!editing ? 'Edit' : 'Go back'}</button>
+            <button className={`${theme} btn`} onClick={() => setEditing(!editing)}>
+                {!editing ? 'Edit' : 'Go back'}
+            </button>
 
             {weightData?.weightList?.length > 0 && editing &&
                 <WeightDataList 
