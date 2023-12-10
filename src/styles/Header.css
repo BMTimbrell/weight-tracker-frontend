@@ -1,0 +1,75 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+}
+
+.header-content {
+    min-height: 3.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 75rem;
+    margin: 0 auto;
+    padding: 0 1.875rem;
+  }
+
+.nav-list {
+    display: flex;
+    column-gap: 2.5rem;
+}
+  
+.nav-link {
+    font-size: 0.9375rem;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.4s ease-in-out;
+    position: relative;
+}
+  
+.dark .nav-link {
+    color: rgba(0, 0, 0, 0.7);
+}
+  
+.nav-link:hover, .nav-link-active, .nav-link:focus {
+    color: white;
+}
+  
+.dark .nav-link:hover, .dark .nav-link-active, .dark .nav-link:focus {
+    color: black;
+}
+  
+  
+.nav-link::after {
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    bottom: -0.25rem;
+    transition: all 0.2s ease-in-out;
+    opacity: 0;
+    pointer-events: none;
+}
+  
+.dark .nav-link::after {
+    background-color: black;
+}
+  
+.nav-link:hover::after, .nav-link:focus-visible::after {
+    opacity: 1;
+}
+
+.nav-link:focus-visible {
+    outline: none;
+}
+  
+.logo {
+    font-size: 2rem;
+    transition: all 0.4s;
+}
+
+.logo:focus {
+    scale: 1.1;
+    outline: none;
+}

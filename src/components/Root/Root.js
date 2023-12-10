@@ -9,7 +9,7 @@ function Root() {
         <ThemeProvider>
             <UserProvider>
                 <Header />
-                <main>
+                <main className="main">
                     <Outlet />
                 </main>
             </UserProvider>

@@ -1,17 +1,18 @@
 import { NavLink, Link } from 'react-router-dom';
 import { useUserContext } from '../../hooks/UserContext';
 import { useThemeContext } from '../../hooks/ThemeContext';
+import '../../styles/Header.css';
 
 function Header() {
     const { user } = useUserContext();
     const [theme] = useThemeContext();
 
     return (
-        <header className={theme}>
+        <header className={`header ${theme}`}>
             <div className={'header-content'}>
                 <Link className="logo" to="/">Weight Tracker</Link>
-                <nav>
-                    <ul>
+                <nav className="nav">
+                    <ul className="nav-list">
                         <li key="home">
                             <NavLink 
                                 to="/" 

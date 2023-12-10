@@ -64,10 +64,38 @@ function RegistrationForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="email" name="email" onChange={handleChange} placeholder="Enter Email" required />
-            <input type="name" name="name" onChange={handleChange} placeholder="Enter Name" required />
-            <input type="password" name="password" onChange={handleChange} placeholder="Enter Password" required />
-            <input type="password" name="reEnteredPassword" onChange={handleChange} placeholder="Re-enter Password" required />
+            <input
+                className={`${theme} input`} 
+                type="email" 
+                name="email" 
+                onChange={handleChange} 
+                placeholder="Enter Email" 
+                required 
+            />
+            <input
+                className={`${theme} input`}  
+                type="name" 
+                name="name" 
+                onChange={handleChange} 
+                placeholder="Enter Name" 
+                required 
+            />
+            <input
+                className={`${theme} input`}  
+                type="password" 
+                name="password" 
+                onChange={handleChange} 
+                placeholder="Enter Password" 
+                required 
+                />
+            <input
+                className={`${theme} input`}  
+                type="password" 
+                name="reEnteredPassword" 
+                onChange={handleChange} 
+                placeholder="Enter Password Again" 
+                required 
+                />
             <button className={`${theme} btn`} type="submit" disabled={loading}>Register</button>   
             {error}
         </form>

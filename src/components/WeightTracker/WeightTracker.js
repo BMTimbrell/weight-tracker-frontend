@@ -91,7 +91,7 @@ export default function WeightTracker() {
             <h1>Track Your Weight</h1>
             <label htmlFor="units">Select Measurement: </label>
             <select
-                className={theme} 
+                className={`${theme} select`} 
                 id="units" 
                 defaultValue={inKilos} 
                 onChange={e => setInKilos(JSON.parse(e.target.value))}
@@ -101,7 +101,7 @@ export default function WeightTracker() {
             </select>
             <label htmlFor="year">Filter by year: </label>
             <select
-                className={theme} 
+                className={`${theme} select`} 
                 id="year" 
                 value={filter.year} 
                 onChange={e => setFilter(prev => ({...prev, year: Number(e.target.value)}))}
@@ -113,7 +113,7 @@ export default function WeightTracker() {
             </select>
             <label htmlFor="month">Filter by month: </label>
             <select
-                className={theme} 
+                className={`${theme} select`} 
                 id="month" 
                 value={filter.month} 
                 onChange={e => setFilter(prev => ({...prev, month: Number(e.target.value)}))}

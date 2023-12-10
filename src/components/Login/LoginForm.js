@@ -38,8 +38,22 @@ function LoginForm() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <input type="email" name="email" onChange={handleChange} placeholder="Enter Email" required />
-            <input type="password" name="password" onChange={handleChange} placeholder="Enter Password" required />
+            <input 
+                type="email" 
+                name="email"
+                className={`${theme} input`} 
+                onChange={handleChange} 
+                placeholder="Enter Email" 
+                required 
+            />
+            <input 
+                type="password" 
+                name="password"
+                className={`${theme} input`}  
+                onChange={handleChange} 
+                placeholder="Enter Password" 
+                required 
+            />
             <button type="submit" className={`${theme} btn`} disabled={loading}>{!loading ? 'Login' : 'Logging in...'}</button>
             {error}
         </form>

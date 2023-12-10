@@ -1,3 +1,8 @@
+:root {
+  --blue: hsl(200, 50%, 50%);
+  --green: hsl(155, 50%, 45%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -20,6 +25,7 @@ button {
 
 body {
   font-family: 'Inter', sans-serif;
+  padding-top: 3.75rem;
 }
 
 body.dark {
@@ -42,14 +48,8 @@ body.green {
   color: black;
 }
 
-.header-content {
-  height: 3.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 75rem;
-  margin: 0 auto;
-  padding: 0 1.875rem;
+.main {
+  padding: 2rem;
 }
 
 .light {
@@ -63,76 +63,24 @@ body.green {
 }
 
 .blue {
-  background-color: hsl(200, 50%, 50%);
+  background-color: var(--blue);
   color: white;
 }
 
 .green {
-  background-color: hsl(155, 50%, 45%);
+  background-color: var(--green);
   color: white;
 }
 
-nav ul {
-  display: flex;
-  column-gap: 2.5rem;
-}
-
-.nav-link {
-  font-size: 0.9375rem;
-  color: rgba(255, 255, 255, 0.8);
-  transition: all 0.4s ease-in-out;
-  position: relative;
-}
-
-.dark .nav-link {
-  color: rgba(0, 0, 0, 0.7);
-}
-
-.nav-link:hover {
-  color: white;
-}
-
-.dark .nav-link:hover {
-  color: black;
-}
-
-.nav-link-active {
-  color: white;
-}
-
-.dark .nav-link-active {
-  color: black;
-}
-
-.nav-link::after {
-  content: '';
-  height: 2px;
-  width: 100%;
-  background-color: white;
-  position: absolute;
-  left: 0;
-  bottom: -0.25rem;
-  transition: all 0.2s ease-in-out;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.dark .nav-link::after {
-  background-color: black;
-}
-
-.nav-link:hover::after {
-  opacity: 1;
-}
-
-.logo {
-  font-size: 2rem;
-}
+/* Button Styles */
 
 .btn {
   border-radius: 50000px;
   cursor: pointer;
   padding: 0.3125em 0.625em;
+}
+
+.btn, .select {
   transition: all 0.4s;
 }
 
@@ -149,7 +97,7 @@ nav ul {
 }
 
 .btn.dark:hover {
-  background-color: hsl(0, 0%, 80%);
+  background-color: hsl(0, 0%, 70%);
 }
 
 .btn:disabled {
@@ -181,10 +129,71 @@ nav ul {
   background-color: hsl(0, 80%, 60%);
 }
 
+.btn:focus-visible, .select:focus-visible {
+  outline: none;
+  scale: 1.2;
+}
+
+/* Hyperlink Styles */
+
 .link {
   color: hsl(210, 100%, 50%);
 }
 
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Select Styles */
+
+.select {
+  border: none;
+  padding: 0.25em 0.5em;
+  border-radius: 500000px;
+  cursor: pointer;
+}
+
+/* Input Styles */
+
+.input {
+  padding: 0.25em 0.5em;
+  border-radius: 500000px;
+  background-color: white;
+  color: black;
+}
+
+.input.light {
+  border: 1px solid black;
+}
+
+.input.light:focus {
+  outline: 1px solid black;
+}
+
+.input.dark {
+  border: 1px solid gray;
+}
+
+.input.dark:focus {
+  outline: 1px solid white;
+}
+
+.input.blue {
+  border: 1px solid var(--blue);
+}
+
+.input.blue:focus {
+  outline: 1px solid var(--blue);
+}
+
+.input.green {
+  border: 1px solid var(--green);
+}
+
+.input.green:focus {
+  outline: 1px solid var(--green);
+}
+
 .main-heading {
-  
+
 }

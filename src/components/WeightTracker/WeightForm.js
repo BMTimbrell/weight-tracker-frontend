@@ -34,7 +34,8 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
             <input 
                 ref={weightRef}
                 type="text"
-                id="weight" 
+                id="weight"
+                className={`${theme} input`} 
                 placeholder={'weight in ' + (inKilos ? 'kg' : 'lbs')}
                 required 
             />
@@ -43,6 +44,7 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
                 ref={dateRef} 
                 type="date" 
                 id="date"
+                className={`${theme} input`}
                 min="2000-01-01" 
                 max="2100-12-31"
                 required 

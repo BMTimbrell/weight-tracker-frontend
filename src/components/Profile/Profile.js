@@ -81,6 +81,7 @@ export default function Profile() {
                 <form onSubmit={handleSubmit}>
                     <input 
                         type="text"
+                        className={`${theme} input`}
                         onChange={e => setFormData(prev => (
                             {...prev, name: e.target.value}
                         ))} 
@@ -88,6 +89,7 @@ export default function Profile() {
                     />
                     <input 
                         type="email"
+                        className={`${theme} input`}
                         onChange={e => setFormData(prev => (
                             {...prev, email: e.target.value}
                         ))} 
@@ -95,6 +97,7 @@ export default function Profile() {
                     />
                     <input 
                         type="password"
+                        className={`${theme} input`}
                         onChange={e => setFormData(prev => (
                             {...prev, password: e.target.value}
                         ))} 
@@ -112,7 +115,7 @@ export default function Profile() {
             }
             <button className={`${theme} btn`} onClick={() => setEditing(!editing)}>{!editing ? 'Edit Details' : 'Cancel'}</button>
             <label htmlFor="theme">Choose theme: </label>
-            <select className={theme} value={theme} id="theme" onChange={handleThemeChange}>
+            <select className={`${theme} select`} value={theme} id="theme" onChange={handleThemeChange}>
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
                 <option value="blue">Blue</option>
