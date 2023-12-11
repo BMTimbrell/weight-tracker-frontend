@@ -1,6 +1,7 @@
 :root {
   --blue: hsl(200, 50%, 50%);
   --green: hsl(155, 50%, 45%);
+  --gray: rgb(105, 105, 105);
 }
 
 * {
@@ -58,8 +59,8 @@ body.green {
 }
 
 .dark {
-  background-color: white;
-  color: black;
+  background-color: var(--gray);
+  color: white;
 }
 
 .blue {
@@ -97,11 +98,12 @@ body.green {
 }
 
 .btn.dark:hover {
-  background-color: hsl(0, 0%, 70%);
+  background-color: rgb(139, 139, 139);
 }
 
 .btn:disabled {
   cursor: default;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .btn.light:disabled {
@@ -109,15 +111,16 @@ body.green {
 }
 
 .btn.dark:disabled {
-  background-color: hsl(0, 0%, 100%, 0.4);
+  background-color: rgb(139, 139, 139, 0.5);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .btn.blue:disabled {
-  background-color: hsl(200, 50%, 50%, 0.4);
+  background-color: hsl(200, 50%, 60%, 0.6);
 }
 
 .btn.green:disabled {
-  background-color: hsl(155, 50%, 45%, 0.4);
+  background-color: hsl(155, 50%, 55%, 0.6);
 }
 
 .btn.delete {
@@ -192,8 +195,4 @@ body.green {
 
 .input.green:focus {
   outline: 1px solid var(--green);
-}
-
-.main-heading {
-
 }
