@@ -24,5 +24,5 @@ export default function Logout() {
             .finally(() => setLoading(false));
     }, [navigate]);
     
-    return <h1>{loading ? 'Logging Out...' : error ? 'Logout Failed' : ''}</h1>;
+    return <h1 className={!error ? 'h1' : 'error'}>{loading ? 'Logging Out...' : error ? 'Logout Failed' : ''}</h1>;
 }

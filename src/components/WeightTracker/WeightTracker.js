@@ -5,7 +5,7 @@ import WeightDataList from './WeightDataList';
 import { useRef, useState, useEffect } from 'react';
 import formatDate from '../../utils/formatDate';
 import convertToUnit from '../../utils/convertToUnit';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 import { useThemeContext} from '../../hooks/ThemeContext';
@@ -78,6 +78,19 @@ export default function WeightTracker() {
         );
     };
 
+    const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload?.length) {
+            return (
+                <div className="tooltip">
+                    <p className="p">{label}</p>
+                    <p className="p">
+                        Weight: {payload[0].value + (inKilos ? 'kg' : 'lbs')}
+                    </p>
+                </div>
+            );
+        }
+    };
+
     if (!user) return (
         <>
             <h1 className="h1">Track Your Weight</h1>
@@ -133,36 +146,41 @@ export default function WeightTracker() {
             </div>
             
             
-            {loading && <h2>Loading...</h2>}
-            {error && <h2>Failed to load data</h2>}
+            {loading && <h2 className="h2 margin-top">Loading...</h2>}
+            {error && <h2 className="error">Failed to load data</h2>}
             {weightData?.weightList?.length < 1 &&
-                <p>You haven't submitted any data yet.</p>
+                <p className="p margin-top margin-bottom">You haven't submitted any data yet.</p>
             }
 
             {weightData?.weightList?.length > 0 && !editing && formattedData &&
-                <LineChart
-                    width={500}
-                    height={300}
-                    data={formattedData}
-                    margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                    }}
-              >
+                <ResponsiveContainer 
+                    width="100%" 
+                    aspect={3} 
+                    style={{
+                        margin: '2rem 0', 
+                        backgroundColor: 'white', 
+                        borderRadius: '0.25rem', 
+                        paddingTop: '1rem', 
+                        paddingBottom: '1rem', 
+                        paddingRight: '1.5rem'
+                        }}
+                    >
+                <LineChart data={formattedData}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey="dateFormatted" />
                 <YAxis />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip />} />
                 <Legend />
                 <Line type="monotone" dataKey="weight" stroke="#8884d8" activeDot={{ r: 8 }} />
               </LineChart>
+              </ResponsiveContainer>
             }
 
-            <button className={`${theme} btn`} onClick={() => setEditing(!editing)}>
-                {!editing ? 'Edit Weight Data' : 'Go Back'}
-            </button>
+            {weightData?.weightList?.length > 0 && 
+                <button className={`${theme} btn`} onClick={() => setEditing(!editing)} style={{marginBottom: '2.5rem'}}>
+                    {!editing ? 'Edit Weight Data' : 'Go Back'}
+                </button>
+            }
 
             {weightData?.weightList?.length > 0 && editing &&
                 <WeightDataList 

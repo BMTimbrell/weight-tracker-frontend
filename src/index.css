@@ -2,6 +2,7 @@
   --blue: hsl(200, 50%, 50%);
   --green: hsl(155, 50%, 45%);
   --gray: rgb(105, 105, 105);
+  --warning: hsl(0, 80%, 50%);
 }
 
 * {
@@ -131,7 +132,7 @@ body.green {
 }
 
 .btn.delete {
-  background-color: hsl(0, 80%, 50%);
+  background-color: var(--warning);
   color: white;
 }
 
@@ -227,7 +228,7 @@ body.green {
 .error {
   text-align: center;
   margin: 1rem 0;
-  color: hsl(0, 80%, 50%);
+  color: var(--warning);
 }
 
 .align-left {
@@ -240,6 +241,10 @@ body.green {
 
 .margin-bottom-small {
   margin-bottom: 1rem;
+}
+
+.margin-bottom {
+  margin-bottom: 2rem;
 }
 
 /* Containers */
@@ -281,6 +286,13 @@ body.green {
   flex-wrap: wrap;
   justify-content: center;
   row-gap: 0.5rem;
+}
+
+.tooltip {
+  background-color: rgb(255, 251, 216);
+  color: black;
+  padding: 0.5em 1em;
+  border-radius: 0.25rem;
 }
 
 /* Media Queries */

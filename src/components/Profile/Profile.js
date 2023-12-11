@@ -11,7 +11,7 @@ export default function Profile() {
     const { user} = useUserContext();
     const navigate = useNavigate();
     const [submitting, setSubmitting] = useState(false);
-    const { loading, data: userData, error } = useFetch(`/users/${user?.id}`, {}, [submitting]);
+    const { loading, data: userData, error } = useFetch(user && `/users/${user?.id}`, {}, [submitting]);
     const [editing, setEditing] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
@@ -20,9 +20,9 @@ export default function Profile() {
     });
     const [formError, setFormError] = useState('');
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (!user) navigate('/login');
-    }, [user]);
+    }, [user]);*/
 
     useEffect(() => {
         if (userData?.authorisationFailed) navigate('/logout');
@@ -134,5 +134,12 @@ export default function Profile() {
                 </select>
             </div>
         </div>
+    );
+
+    return (
+        <>
+            <h1 className="h1">Profile</h1>
+            <p className="p">You must be <Link className="link" to="/login">logged in</Link> to view this page.</p>
+        </>
     );
 }

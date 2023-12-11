@@ -12,6 +12,7 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
 
     const handleSubmit = async (e, dataId) => {
         e.preventDefault(e);
+        setError('');
         if (!isPositiveNumber(weightRef.current.value)) {
             setError('You must enter a positive number for weight');
             return;
@@ -55,7 +56,7 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
             </div>
 
             <button className={`${theme} btn`} type="submit" disabled={submitting}>{buttonText}</button>
-            {error}
+            <p className={error ? 'error' : 'hidden'}>{error}</p>
         </form>
     );
 }
