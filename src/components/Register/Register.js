@@ -1,6 +1,6 @@
 import RegistrationForm from './RegistrationForm';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useUserContext } from '../../hooks/UserContext';
 
 function Register() {
@@ -13,8 +13,9 @@ function Register() {
 
     return (
         <>
-            <h1>Register</h1>
+            <h1 className="h1">Register</h1>
             <RegistrationForm />
+            <p className="p">Already have an account? <Link className="link" to="/login">Click here</Link> to log in.</p>
         </>
     );
 }

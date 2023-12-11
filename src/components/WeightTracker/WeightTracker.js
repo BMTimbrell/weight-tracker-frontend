@@ -80,47 +80,59 @@ export default function WeightTracker() {
 
     if (!user) return (
         <>
-            <h1>Track Your Weight</h1>
-            <p>You must <Link className="link" to="/login">log in</Link> to track your weight.</p>
-            <p>Don't have an account? <Link className="link" to="/register">Click here</Link> to register.</p>
+            <h1 className="h1">Track Your Weight</h1>
+            <p className="p">You must <Link className="link" to="/login">log in</Link> to track your weight.</p>
+            <p className="p">Don't have an account? <Link className="link" to="/register">Click here</Link> to register.</p>
         </>
     );
 
     return (
         <>
-            <h1>Track Your Weight</h1>
-            <label htmlFor="units">Select Measurement: </label>
-            <select
-                className={`${theme} select`} 
-                id="units" 
-                defaultValue={inKilos} 
-                onChange={e => setInKilos(JSON.parse(e.target.value))}
-            >
-                <option key="1" value={false}>lbs</option>
-                <option key="2" value={true}>kg</option>
-            </select>
-            <label htmlFor="year">Filter by year: </label>
-            <select
-                className={`${theme} select`} 
-                id="year" 
-                value={filter.year} 
-                onChange={e => setFilter(prev => ({...prev, year: Number(e.target.value)}))}
-            >
-                <option key="none" value={0}>Any</option>
-                {years.map(year => 
-                    <option key={year} value={year}>{year}</option>
-                )}
-            </select>
-            <label htmlFor="month">Filter by month: </label>
-            <select
-                className={`${theme} select`} 
-                id="month" 
-                value={filter.month} 
-                onChange={e => setFilter(prev => ({...prev, month: Number(e.target.value)}))}
-            >
-                <option key="none" value={0}>Any</option>
-                {generateMonthOptions()}
-            </select>
+            <h1 className="h1">Track Your Weight</h1>
+            <div className="flex filters">
+                <div className="flex">
+                    <label htmlFor="units">Select Measurement: </label>
+                    <select
+                        className={`${theme} select`} 
+                        id="units" 
+                        defaultValue={inKilos} 
+                        onChange={e => setInKilos(JSON.parse(e.target.value))}
+                    >
+                        <option key="1" value={false}>lbs</option>
+                        <option key="2" value={true}>kg</option>
+                    </select>
+                </div>
+                
+                <div className="flex">
+                <label htmlFor="year">Filter by year: </label>
+                    <select
+                        className={`${theme} select`} 
+                        id="year" 
+                        value={filter.year} 
+                        onChange={e => setFilter(prev => ({...prev, year: Number(e.target.value)}))}
+                    >
+                        <option key="none" value={0}>Any</option>
+                        {years.map(year => 
+                            <option key={year} value={year}>{year}</option>
+                        )}
+                    </select>
+                </div>
+                
+                <div className="flex">
+                    <label htmlFor="month">Filter by month: </label>
+                    <select
+                        className={`${theme} select`} 
+                        id="month" 
+                        value={filter.month} 
+                        onChange={e => setFilter(prev => ({...prev, month: Number(e.target.value)}))}
+                    >
+                        <option key="none" value={0}>Any</option>
+                        {generateMonthOptions()}
+                    </select>
+                </div>
+            </div>
+            
+            
             {loading && <h2>Loading...</h2>}
             {error && <h2>Failed to load data</h2>}
             {weightData?.weightList?.length < 1 &&
@@ -149,7 +161,7 @@ export default function WeightTracker() {
             }
 
             <button className={`${theme} btn`} onClick={() => setEditing(!editing)}>
-                {!editing ? 'Edit' : 'Go back'}
+                {!editing ? 'Edit Weight Data' : 'Go Back'}
             </button>
 
             {weightData?.weightList?.length > 0 && editing &&
@@ -166,7 +178,7 @@ export default function WeightTracker() {
 
             {!editing && (
                 <>
-                    <h2>Submit Weight</h2>
+                    <h2 className="h2">Submit Weight</h2>
                     <WeightForm 
                         dateRef={dateRef} 
                         weightRef={weightRef} 

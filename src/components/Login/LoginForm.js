@@ -37,7 +37,7 @@ function LoginForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             <input 
                 type="email" 
                 name="email"
@@ -55,7 +55,7 @@ function LoginForm() {
                 required 
             />
             <button type="submit" className={`${theme} btn`} disabled={loading}>{!loading ? 'Login' : 'Logging in...'}</button>
-            {error}
+            <p className={error ? 'error' : 'hidden'}>{error}</p>
         </form>
     );
 }

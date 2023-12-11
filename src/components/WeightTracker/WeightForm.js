@@ -29,26 +29,31 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
     };
 
     return (
-        <form onSubmit={e => handleSubmit(e, dataId)}>
-            <label htmlFor="weight">Enter Weight: </label>
-            <input 
-                ref={weightRef}
-                type="text"
-                id="weight"
-                className={`${theme} input`} 
-                placeholder={'weight in ' + (inKilos ? 'kg' : 'lbs')}
-                required 
-            />
-            <label htmlFor="date">Enter Date: </label>
-            <input 
-                ref={dateRef} 
-                type="date" 
-                id="date"
-                className={`${theme} input`}
-                min="2000-01-01" 
-                max="2100-12-31"
-                required 
-            />
+        <form className="form" style={{maxWidth: '20rem'}} onSubmit={e => handleSubmit(e, dataId)}>
+            <div className="weight-fields">
+                <label htmlFor="weight">Enter Weight: </label>
+                <input 
+                    ref={weightRef}
+                    type="text"
+                    id="weight"
+                    className={`${theme} input`}
+                    style={{width: '100%'}} 
+                    placeholder={'weight in ' + (inKilos ? 'kg' : 'lbs')}
+                    required 
+                />
+
+                <label htmlFor="date">Enter Date: </label>
+                <input 
+                    ref={dateRef} 
+                    type="date" 
+                    id="date"
+                    className={`${theme} input`}
+                    min="2000-01-01" 
+                    max="2100-12-31"
+                    required 
+                />
+            </div>
+
             <button className={`${theme} btn`} type="submit" disabled={submitting}>{buttonText}</button>
             {error}
         </form>

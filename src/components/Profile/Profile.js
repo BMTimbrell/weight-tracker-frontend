@@ -66,19 +66,20 @@ export default function Profile() {
     };
 
     if (user) return (
-        <>
-            <h1>{userData?.name || user['name']}'s Profile</h1>
-            <h2>User Details</h2>
-            {loading && <p>Loading...</p>}
-            {error && <p>Failed to load data</p>}
-            {userData && !error && !editing && (
+        <div>
+            <h1 className="h1 align-left">{userData?.name || user['name']}'s Profile</h1>
+            <h2 className="h2">User Details</h2>
+            {loading && <p className="p align-left">Loading...</p>}
+            {error && <p className="error align-left">Failed to load data</p>}
+            {userData && !loading && !error && !editing && (
                 <>
-                    <p>Name: {userData.name}</p>
-                    <p>Email: {userData.email}</p>
+                    <p className="p align-left">Name: {userData.name}</p>
+                    <p className="p align-left margin-bottom-small">Email: {userData.email}</p>
                 </>
             )}
             {editing && 
-                <form onSubmit={handleSubmit}>
+                <form className="form" onSubmit={handleSubmit} style={{marginBottom: '0.625rem'}}>
+                    <p className={formError ? 'error' : 'hidden'}>{formError}</p>
                     <input 
                         type="text"
                         className={`${theme} input`}
@@ -110,19 +111,28 @@ export default function Profile() {
                     >
                         {submitting ? 'Saving...' : 'Save Changes'}
                     </button>
-                    {formError}
                 </form>
             }
-            <button className={`${theme} btn`} onClick={() => setEditing(!editing)}>{!editing ? 'Edit Details' : 'Cancel'}</button>
-            <label htmlFor="theme">Choose theme: </label>
-            <select className={`${theme} select`} value={theme} id="theme" onChange={handleThemeChange}>
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="blue">Blue</option>
-                <option value="green">Green</option>
-            </select>
-            <h2>Your Weight</h2>
-            <p>Track your weight <Link className="link" to="/">here</Link></p>
-        </>
+            <button 
+                className={`${theme} btn`}
+                style={editing ? {width: '100%', marginTop: '-1.25rem'} : {}} 
+                onClick={() => {
+                    setEditing(!editing);
+                    !editing && setFormError('');
+                }}
+            >
+                {!editing ? 'Edit Details' : 'Cancel'}
+            </button>
+
+            <div className="flex margin-top">
+                <label htmlFor="theme">Choose theme: </label>
+                <select className={`${theme} select`} value={theme} id="theme" onChange={handleThemeChange}>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                </select>
+            </div>
+        </div>
     );
 }

@@ -63,7 +63,7 @@ function RegistrationForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="form" onSubmit={handleSubmit}>
             <input
                 className={`${theme} input`} 
                 type="email" 
@@ -97,7 +97,7 @@ function RegistrationForm() {
                 required 
                 />
             <button className={`${theme} btn`} type="submit" disabled={loading}>Register</button>   
-            {error}
+            <p className={error ? 'error' : 'hidden'}>{error}</p>
         </form>
     );
 }
