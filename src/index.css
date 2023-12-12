@@ -140,6 +140,10 @@ body.green {
   background-color: hsl(0, 80%, 60%);
 }
 
+.btn.delete:disabled {
+  background-color: hsl(0, 80%, 60%, 0.6);
+}
+
 .btn:focus-visible, .select:focus-visible {
   outline: none;
   scale: 1.2;
@@ -293,6 +297,36 @@ body.green {
   color: black;
   padding: 0.5em 1em;
   border-radius: 0.25rem;
+}
+
+.weight-data {
+  background-color: white;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 0.25rem;
+}
+
+.light .weight-data {
+  border: 1px solid black;
+}
+
+.dark .weight-data {
+  border: 1px solid var(--gray);
+  color: black;
+}
+
+.blue .weight-data {
+  border: 1px solid var(--blue);
+}
+
+.green .weight-data {
+  border: 1px solid var(--green);
+}
+
+.weight-data-btns {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 0.25rem;
 }
 
 /* Media Queries */

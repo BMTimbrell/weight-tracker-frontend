@@ -17,29 +17,31 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
     return (
         <>
             {!editing ? (
-                <>
+                <div className="form weight-data">
                     {children}
-                    {error}
-                    <button 
-                        className={`${theme} btn`}
-                        onClick={() => setUpdating({id: dataId})} 
-                        disabled={submitting}
-                    >
-                        Edit
-                    </button>
-                    <button 
-                        className={`${theme} btn delete`}
-                        onClick={async () => {
-                            setSubmitting(true);
-                            const result = await deleteWeightData(user.id, dataId);
-                            if (!result) setError('Failed to remove weight');
-                            setSubmitting(false);
-                        }}
-                        disabled={submitting}
-                    >
-                        Delete
-                    </button>
-                </>
+                    <p className={error ? 'error' : 'hidden'}>{error}</p>
+                    <div className="weight-data-btns">
+                        <button 
+                            className={`${theme} btn`}
+                            onClick={() => setUpdating({id: dataId})} 
+                            disabled={submitting}
+                        >
+                            Edit
+                        </button>
+                        <button 
+                            className={`${theme} btn delete`}
+                            onClick={async () => {
+                                setSubmitting(true);
+                                const result = await deleteWeightData(user.id, dataId);
+                                if (!result) setError('Failed to remove weight');
+                                setSubmitting(false);
+                            }}
+                            disabled={submitting}
+                        >
+                            Delete
+                        </button>
+                    </div>
+                </div>
             ) : (
                 <>
                     <WeightForm
@@ -51,14 +53,15 @@ export default function WeightData({ children, dataId, updating, setUpdating, in
                         buttonText="Save Changes"
                         dataId={dataId}
                         setEditing={setEditing}
-                    />
-                    <button 
-                        className={`${theme} btn`} 
-                        onClick={() => setEditing(false)} 
-                        disabled={submitting}
                     >
-                        Cancel
-                    </button>
+                        <button 
+                            className={`${theme} btn`} 
+                            onClick={() => setEditing(false)} 
+                            disabled={submitting}
+                        >
+                            Cancel
+                        </button>
+                    </WeightForm>
                 </>
                 
             )}

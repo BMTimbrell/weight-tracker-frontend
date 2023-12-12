@@ -5,7 +5,17 @@ import { useUserContext } from '../../hooks/UserContext';
 import { useThemeContext } from '../../hooks/ThemeContext';
 import { useState } from 'react';
 
-export default function WeightForm({ weightRef, dateRef, submitting, setSubmitting, inKilos, buttonText = "Submit", dataId = 0, setEditing = null }) {
+export default function WeightForm({ 
+    weightRef, 
+    dateRef, 
+    submitting, 
+    setSubmitting, 
+    inKilos, 
+    buttonText = "Submit", 
+    dataId = 0, 
+    setEditing = null,
+    children
+ }) {
     const { user } = useUserContext();
     const [error, setError] = useState('');
     const [theme] = useThemeContext();
@@ -56,6 +66,7 @@ export default function WeightForm({ weightRef, dateRef, submitting, setSubmitti
             </div>
 
             <button className={`${theme} btn`} type="submit" disabled={submitting}>{buttonText}</button>
+            {children}
             <p className={error ? 'error' : 'hidden'}>{error}</p>
         </form>
     );
