@@ -153,9 +153,10 @@ export default function WeightTracker() {
             }
 
             {weightData?.weightList?.length > 0 && !editing && formattedData &&
+                <div className="graph">
                 <ResponsiveContainer 
-                    width="90%" 
-                    aspect={3}
+                    width="100%" 
+                    height="100%"
                     style={{
                         margin: '2rem 0', 
                         backgroundColor: 'white', 
@@ -174,6 +175,7 @@ export default function WeightTracker() {
                 <Line type="monotone" dataKey="weight" stroke="#8884d8" activeDot={{ r: 8 }} />
               </LineChart>
               </ResponsiveContainer>
+              </div>
             }
 
             {weightData?.weightList?.length > 0 && 
