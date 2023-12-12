@@ -1,7 +1,14 @@
 import WeightData from './WeightData';
 import { useState } from 'react';
 
-export default function WeightDataList({ data, inKilos, dateRef, weightRef, submitting, setSubmitting }) {
+export default function WeightDataList({ 
+    data, 
+    inKilos, 
+    dateRef, 
+    weightRef, 
+    submitting, 
+    setSubmitting 
+}) {
     const [updating, setUpdating] = useState({id: 0});
 
     return (

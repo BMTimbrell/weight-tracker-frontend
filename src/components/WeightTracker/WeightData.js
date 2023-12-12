@@ -4,7 +4,17 @@ import { deleteWeightData } from '../../api/api';
 import { useUserContext } from '../../hooks/UserContext';
 import { useThemeContext } from '../../hooks/ThemeContext';
 
-export default function WeightData({ children, dataId, updating, setUpdating, inKilos, dateRef, weightRef, submitting, setSubmitting }) {
+export default function WeightData({ 
+    children, 
+    dataId, 
+    updating, 
+    setUpdating, 
+    inKilos, 
+    dateRef, 
+    weightRef, 
+    submitting, 
+    setSubmitting 
+}) {
     const [editing, setEditing] = useState(updating.id === dataId);
     const { user } = useUserContext();
     const [error, setError] = useState('');

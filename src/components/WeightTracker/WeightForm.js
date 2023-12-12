@@ -15,7 +15,7 @@ export default function WeightForm({
     dataId = 0, 
     setEditing = null,
     children
- }) {
+}) {
     const { user } = useUserContext();
     const [error, setError] = useState('');
     const [theme] = useThemeContext();

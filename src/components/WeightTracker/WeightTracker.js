@@ -154,8 +154,8 @@ export default function WeightTracker() {
 
             {weightData?.weightList?.length > 0 && !editing && formattedData &&
                 <ResponsiveContainer 
-                    width="100%" 
-                    aspect={3} 
+                    width="90%" 
+                    aspect={3}
                     style={{
                         margin: '2rem 0', 
                         backgroundColor: 'white', 
