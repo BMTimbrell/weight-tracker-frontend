@@ -282,10 +282,6 @@ body.green {
   flex: 1;
 }
 
-.weight-fields input[type="date"] {
-  width: 100%;
-}
-
 .filters {
   flex-wrap: wrap;
   justify-content: center;
