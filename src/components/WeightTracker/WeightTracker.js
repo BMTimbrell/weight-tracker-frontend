@@ -179,7 +179,12 @@ export default function WeightTracker() {
             }
 
             {weightData?.weightList?.length > 0 && 
-                <button className={`${theme} btn`} onClick={() => setEditing(!editing)} style={!editing ? {marginBottom: '2.5rem'} : {margin: '2rem 0'}}>
+                <button 
+                    className={`${theme} btn`} 
+                    name={!editing ? 'Edit Weight Data' : 'Go Back'}
+                    onClick={() => setEditing(!editing)} 
+                    style={!editing ? {marginBottom: '2.5rem'} : {margin: '2rem 0'}}
+                >
                     {!editing ? 'Edit Weight Data' : 'Go Back'}
                 </button>
             }

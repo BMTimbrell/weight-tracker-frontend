@@ -282,8 +282,8 @@ body.green {
   flex: 1;
 }
 
-.weight-fields > :nth-child(2) {
-  flex-basis: 30%;
+.weight-fields input[type="date"] {
+  width: 100%;
 }
 
 .filters {
@@ -299,31 +299,40 @@ body.green {
   border-radius: 0.25rem;
 }
 
-.weight-data {
+.weight-data, button[name="Go Back"] ~ .form {
   background-color: white;
   padding: 1rem;
-  text-align: center;
   border-radius: 0.25rem;
 }
 
-.light .weight-data {
+.weight-info {
+  width: 50%;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+.weight-info > p {
+  margin-bottom: 0.625rem
+}
+
+.light .weight-data, .light button[name="Go Back"] ~ .form {
   border: 1px solid black;
 }
 
-.dark .weight-data {
+.dark .weight-data, .dark button[name="Go Back"] ~ .form {
   border: 1px solid white;
   background-color: var(--gray);
 }
 
-.dark .weight-data .btn {
+.dark .weight-data .btn, .dark button[name="Go Back"] ~ .form .btn {
   border: 1px solid white;
 }
 
-.blue .weight-data {
+.blue .weight-data, .blue button[name="Go Back"] ~ .form {
   border: 1px solid var(--blue);
 }
 
-.green .weight-data {
+.green .weight-data, .green button[name="Go Back"] ~ .form {
   border: 1px solid var(--green);
 }
 
@@ -358,11 +367,5 @@ body.green {
 @media (max-width: 37.5em) {
   .graph {
     height: 18.75rem;
-  }
-}
-
-@media (max-width: 25em) {
-  .graph {
-    height: 12.5rem;
   }
 }

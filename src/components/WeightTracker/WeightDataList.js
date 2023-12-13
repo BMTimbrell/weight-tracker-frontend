@@ -25,8 +25,10 @@ export default function WeightDataList({
                     updating={updating}
                     setUpdating={setUpdating}
                 >
-                    <p>Weight: {el.weight}{!inKilos ? 'lbs' : 'kg'}</p>
-                    <p>Date: {el.dateFormatted}</p>
+                    <div className="weight-info">
+                        <p>Weight: {el.weight}{!inKilos ? 'lbs' : 'kg'}</p>
+                        <p>Date: {el.dateFormatted}</p>
+                    </div>
                 </WeightData>
             ))}
         </>
