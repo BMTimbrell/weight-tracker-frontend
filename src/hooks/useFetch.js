@@ -7,7 +7,7 @@ const DEFAULT_OPTIONS = {
     },
 };
 
-export default function useFetch(endpoint, options = {}, dependencies = [], url='https://weight-tracker-server.onrender.co') {
+export default function useFetch(endpoint, options = {}, dependencies = [], url='https://weight-tracker-server.onrender.com') {
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState(null);
     const [error, setError] = useState(false);
