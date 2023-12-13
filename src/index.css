@@ -278,6 +278,10 @@ body.green {
   white-space: nowrap;
 }
 
+.weight-fields input[type="date"] {
+  justify-self: stretch;
+}
+
 .filters {
   flex-wrap: wrap;
   justify-content: center;
