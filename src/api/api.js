@@ -1,4 +1,4 @@
-const baseUrl = 'https://weight-tracker-server.onrender.com';
+const baseUrl = 'http://localhost:3001';
 
 export const registerUser = async (name, email, password) => {
     try {

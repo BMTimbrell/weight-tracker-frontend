@@ -54,7 +54,6 @@ export default function WeightForm({
                 />
 
                 <label htmlFor="date">Enter Date: </label>
-                <div className="date-picker">
                 <input 
                     ref={dateRef} 
                     type="date" 
@@ -64,7 +63,6 @@ export default function WeightForm({
                     max="2100-12-31"
                     required 
                 />
-                </div>
             </div>
 
             <button className={`${theme} btn`} type="submit" disabled={submitting}>{buttonText}</button>
