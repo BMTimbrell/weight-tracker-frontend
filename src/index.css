@@ -311,8 +311,12 @@ body.green {
 }
 
 .dark .weight-data {
-  border: 1px solid var(--gray);
-  color: black;
+  border: 1px solid white;
+  background-color: var(--gray);
+}
+
+.dark .weight-data .btn {
+  border: 1px solid white;
 }
 
 .blue .weight-data {
