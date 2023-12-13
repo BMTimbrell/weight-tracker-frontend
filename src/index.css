@@ -279,7 +279,7 @@ body.green {
 }
 
 .weight-fields input[type="date"] {
-  justify-self: stretch;
+  -webkit-appearance: none;
 }
 
 .filters {
