@@ -6,7 +6,8 @@
 
 This is an app I made for tracking changes in weight. It sends requests to a [server](https://github.com/BMTimbrell/weight-tracker-backend)
 I made to fetch and update user data. I used a react library called recharts to display data on a graph. The website is hosted
-on Render and can be viewed [here.](https://weight-tracker-mey7.onrender.com)
+on Render and can be viewed [here.](https://weight-tracker-mey7.onrender.com) The server is hosted on a different domain, so you will
+have to enable third party cookies if you want to log in.
 
 
 ## Features
